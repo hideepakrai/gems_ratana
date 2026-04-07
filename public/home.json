@@ -1,0 +1,524 @@
+{
+  "title": "Home",
+  "slug": "/",
+  "isPublished": true,
+  "metaTitle": "GemsRatna - Natural Power & Spiritual Elegance",
+  "metaDescription": "Premium gemstones, crystal jewelry, and spiritual wellness tools crafted for balance, healing, and beauty.",
+  "content": [
+    {
+      "id": "hero-section-wrapper",
+      "type": "section",
+      "adminTitle": "Hero",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "hero-carousel",
+            "type": "carousel",
+            "items": [
+              {
+                "id": "slide-1",
+                "adminTitle": "Natural Healing Slide",
+                "type": "section",
+                "layout": "grid-2",
+                "columns": [
+                  [
+                    {
+                      "id": "slide1-label",
+                      "type": "heading",
+                      "level": "h5",
+                      "text": "Natural Healing"
+                    },
+                    {
+                      "id": "slide1-heading",
+                      "type": "heading",
+                      "level": "h1",
+                      "text": "Energy That Defines Your Spirit."
+                    },
+                    {
+                      "id": "slide1-desc",
+                      "type": "paragraph",
+                      "text": "Discover ethically sourced gemstones, handcrafted crystal pendants, and timeless wellness tools designed to bring harmony, clarity, and luxury into your daily life."
+                    },
+                    {
+                      "id": "slide1-btn",
+                      "type": "button",
+                      "buttons": [
+                        {
+                          "label": "Explore Collection",
+                          "link": "/shop",
+                          "actionType": "link"
+                        },
+                        {
+                          "label": "New Arrivals",
+                          "link": "/shop/new",
+                          "actionType": "link"
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "id": "slide1-img",
+                      "type": "image",
+                      "url": "https://images.unsplash.com/photo-1567941718211-9ffb4bbdaebc?auto=format&fit=crop&q=80&w=1800",
+                      "alt": "Premium Amethyst Cluster"
+                    },
+                    {
+                      "id": "slide1-product-card",
+                      "type": "cards",
+                      "items": [
+                        {
+                          "title": "The Zenith Amethyst",
+                          "description": "Starting at ₹2,500\n\nDeep violet hues, natural crystalline structure, and a calming aura for meditative spaces."
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              },
+              {
+                "id": "slide-2",
+                "adminTitle": "Spiritual Luxury Slide",
+                "type": "section",
+                "layout": "grid-2",
+                "columns": [
+                  [
+                    {
+                      "id": "slide2-label",
+                      "type": "heading",
+                      "level": "h5",
+                      "text": "Spiritual Luxury"
+                    },
+                    {
+                      "id": "slide2-heading",
+                      "type": "heading",
+                      "level": "h1",
+                      "text": "Crafted For Quiet Introspection."
+                    },
+                    {
+                      "id": "slide2-desc",
+                      "type": "paragraph",
+                      "text": "Elevate your sanctuary with calming emeralds, elegant crystal rollers, and thoughtfully selected stones that blend cosmic wisdom with modern wellness."
+                    },
+                    {
+                      "id": "slide2-btn",
+                      "type": "button",
+                      "buttons": [
+                        {
+                          "label": "View Wellness Hub",
+                          "link": "/shop",
+                          "actionType": "link"
+                        },
+                        {
+                          "label": "Shop Best Sellers",
+                          "link": "/shop/new",
+                          "actionType": "link"
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "id": "slide2-img",
+                      "type": "image",
+                      "url": "https://images.unsplash.com/photo-1599209248411-5ee2e0c14661?auto=format&fit=crop&q=80&w=1800",
+                      "alt": "Jade Roller & Crystals"
+                    },
+                    {
+                      "id": "slide2-product-card",
+                      "type": "cards",
+                      "items": [
+                        {
+                          "title": "Divine Ritual Set",
+                          "description": "Starting at ₹1,850\n\nPure Jade rollers and Rose Quartz hearts designed for deep facial renewal and emotional balance."
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              },
+              {
+                "id": "slide-3",
+                "adminTitle": "Celestial Jewelry Slide",
+                "type": "section",
+                "layout": "grid-2",
+                "columns": [
+                  [
+                    {
+                      "id": "slide3-label",
+                      "type": "heading",
+                      "level": "h5",
+                      "text": "Celestial Jewelry"
+                    },
+                    {
+                      "id": "slide3-heading",
+                      "type": "heading",
+                      "level": "h1",
+                      "text": "Wearable Light For Every Occasion."
+                    },
+                    {
+                      "id": "slide3-desc",
+                      "type": "paragraph",
+                      "text": "Celebrate your inner glow with statement crystal pendants, elegant chakra bracelets, and premium sterling silver settings tailored for soulful living."
+                    },
+                    {
+                      "id": "slide3-btn",
+                      "type": "button",
+                      "buttons": [
+                        {
+                          "label": "Explore Jewelry",
+                          "link": "/shop",
+                          "actionType": "link"
+                        },
+                        {
+                          "label": "Custom Designs",
+                          "link": "/shop/new",
+                          "actionType": "link"
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "id": "slide3-img",
+                      "type": "image",
+                      "url": "https://images.unsplash.com/photo-1617038220319-270836109f2a?auto=format&fit=crop&q=80&w=1800",
+                      "alt": "Sterling Silver Crystal Pendant"
+                    },
+                    {
+                      "id": "slide3-product-card",
+                      "type": "cards",
+                      "items": [
+                        {
+                          "title": "The Luna Necklace",
+                          "description": "Starting at ₹3,200\n\nRainbow Moonstone set in pure silver, reflecting the mystic light of the lunar cycles."
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "usp-section-wrapper",
+      "type": "section",
+      "adminTitle": "USP",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "usp",
+            "type": "features",
+            "items": [
+              {
+                "title": "Global Shipping",
+                "description": "Crystals delivered worldwide"
+              },
+              {
+                "title": "Lab Certified",
+                "description": "100% Authentic & Natural"
+              },
+              {
+                "title": "Secure Energy",
+                "description": "Purified & Cleansed before shipping"
+              },
+              {
+                "title": "Expert Guidance",
+                "description": "Gemologists available for consult"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "services-section",
+      "type": "section",
+      "adminTitle": "Services",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "services-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "Bespoke Spiritual Services"
+          },
+          {
+            "id": "services-cards",
+            "type": "cards",
+            "items": [
+              {
+                "title": "Gemstone Consultation",
+                "description": "Personalized sessions to find the stones that align with your birth chart and energy goals.",
+                "image": ""
+              },
+              {
+                "title": "Custom Jewelry Design",
+                "description": "Collaborate with our master silversmiths to create a unique energetic piece tailored for you.",
+                "image": ""
+              },
+              {
+                "title": "Vedic Cleansing",
+                "description": "Traditional purification rituals perform on your ordered gems before they leave our temple.",
+                "image": ""
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "collections-section",
+      "type": "section",
+      "adminTitle": "Collections",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "collections-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "Explore Our Hubs"
+          },
+          {
+            "id": "collections-cards",
+            "type": "cards",
+            "items": [
+              {
+                "title": "Raw Gemstones",
+                "description": "",
+                "image": "https://images.unsplash.com/photo-1523528283115-9bf9b1aa992a?auto=format&fit=crop&q=80",
+                "link": "/category/raw-stones"
+              },
+              {
+                "title": "Spiritual Decor",
+                "description": "",
+                "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80",
+                "link": "/category/decor"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "featured-banner-section",
+      "type": "section",
+      "adminTitle": "FeaturedBanner",
+      "layout": "grid-2",
+      "columns": [
+        [
+          {
+            "id": "feat-img",
+            "type": "image",
+            "url": "https://images.unsplash.com/photo-1574719414139-01273ccd88ce?auto=format&fit=crop&q=80&w=1200",
+            "alt": "Emerald Collection"
+          }
+        ],
+        [
+          {
+            "id": "feat-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "The Emerald Equilibrium"
+          },
+          {
+                "id": "feat-p",
+            "type": "paragraph",
+            "text": "Sourced from the heart of Zambia, our new Zambian Emerald series brings a vibrant luxury to your collection, promoting balance and abundance."
+          },
+          {
+            "id": "feat-btn",
+            "type": "button",
+            "buttons": [
+              {
+                "id": "btn-shop-series",
+                "label": "Shop The Emeralds",
+                "link": "/shop",
+                "actionType": "link"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "craft-section",
+      "type": "section",
+      "adminTitle": "Craft",
+      "layout": "grid-2",
+      "columns": [
+        [
+          {
+            "id": "craft-img",
+            "type": "image",
+            "url": "https://images.unsplash.com/photo-1512168494467-307f0b38c26a?auto=format&fit=crop&q=80&w=1600",
+            "alt": "Gem Cutting Process"
+          }
+        ],
+        [
+          {
+            "id": "craft-heading",
+            "type": "heading",
+            "level": "h3",
+            "text": "Ethically sourced. Soulfully polished."
+          },
+          {
+            "id": "craft-p",
+            "type": "paragraph",
+            "text": "Every stone is hand-selected for its clarity and vibration—ethically mined, beautifully cut, and naturally untreated whenever possible."
+          },
+          {
+            "id": "craft-list",
+            "type": "list",
+            "items": [
+              "Conflict-free sourcing + fair trade partner",
+              "Natural, untreated premium gemstones",
+              "Hand-cleansed by certified experts",
+              "Vedic certification with every order"
+            ]
+          },
+          {
+            "id": "craft-btn",
+            "type": "button",
+            "buttons": [
+              {
+                "id": "btn-shop-mat",
+                "label": "View Authenticity",
+                "link": "/shop",
+                "actionType": "link"
+              },
+              {
+                "id": "btn-book",
+                "label": "Talk to an Expert",
+                "link": "/contact",
+                "actionType": "link"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "testimonials-section",
+      "type": "section",
+      "adminTitle": "Testimonials",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "test-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "Stories of Transformation"
+          },
+          {
+            "id": "test-1",
+            "type": "testimonial",
+            "quote": "The Amethyst cluster isn't just a stone; it's a piece of raw nature that redefined my space's energy completely.",
+            "author": "Sarah Jenkins",
+            "role": "Yoga Practitioner",
+            "avatar": ""
+          },
+          {
+            "id": "test-2",
+            "type": "testimonial",
+            "quote": "Exquisite quality. The Moonstone pendant I ordered feels alive with light. Truly a premium experience.",
+            "author": "Marcus Thorne",
+            "role": "Spiritual Healer",
+            "avatar": ""
+          }
+        ]
+      ]
+    },
+    {
+      "id": "blog-section",
+      "type": "section",
+      "adminTitle": "Blog",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "blog-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "The Cosmic Journal"
+          },
+          {
+            "id": "blog-cards",
+            "type": "cards",
+            "items": [
+              {
+                "title": "Understanding Chakra Energies",
+                "description": "Spiritual Growth",
+                "image": "https://images.unsplash.com/photo-1528319725582-ddc0b6aabc74?auto=format&fit=crop&q=80&w=1200",
+                "link": "/blog/chakra-energies"
+              },
+              {
+                "title": "Moon Phases and Gemstones",
+                "description": "Lunar Wisdom",
+                "image": "https://images.unsplash.com/photo-1532661039901-75b00ff71cba?auto=format&fit=crop&q=80&w=1200",
+                "link": "/blog/moon-phases"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "faq-section-wrapper",
+      "type": "section",
+      "adminTitle": "FAQ",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "faq-heading",
+            "type": "heading",
+            "level": "h2",
+            "text": "Spiritual Queries"
+          },
+          {
+            "id": "faq-items",
+            "type": "features",
+            "items": [
+              {
+                "title": "How are the stones purified?",
+                "description": "We use traditional sage smudging and sound healing before packaging every stone."
+              },
+              {
+                "title": "Do you provide certificates?",
+                "description": "Yes, every premium stone comes with a lab authenticity certificate."
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "cta-section-wrapper",
+      "type": "section",
+      "adminTitle": "CTA",
+      "layout": "grid-1",
+      "columns": [
+        [
+          {
+            "id": "cta-bottom",
+            "type": "cta",
+            "title": "Ready to align your energy?",
+            "subtitle": "",
+            "description": "Join 10,000+ souls who have elevated their spiritual experience with GemsRatna.",
+            "buttonLabel": "Shop The Collection",
+            "buttonLink": "/shop"
+          }
+        ]
+      ]
+    }
+  ]
+}
