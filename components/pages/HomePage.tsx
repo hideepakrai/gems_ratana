@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import {
   ArrowRight,
+  Search,
+  ShoppingCart,
   Truck,
   ShieldCheck,
   RefreshCcw,
@@ -19,6 +21,10 @@ import {
   Plus,
   Minus,
   ArrowUp,
+  Menu,
+  X,
+  User,
+  MoonStar,
 } from "lucide-react";
 
 import { Link } from "@/lib/router";

@@ -4,11 +4,12 @@ import Providers from '@/components/Providers';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import StoreProvider from '@/app/StoreProvider';
 import { AnnotatorPlugin } from '@/components/annotationPlugin';
-import { Geist } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
   title: 'GemsRatna Premium Gemstones',
@@ -27,7 +28,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("font-sans", geist.variable)}
+      className={cn("font-sans", inter.variable, playfair.variable)}
     >
       <body>
         <ChunkErrorRecovery />

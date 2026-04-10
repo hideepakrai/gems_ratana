@@ -1,18 +1,14 @@
-import HomePage from "@/components/pages/HomePage";
 import { Metadata } from "next";
-import { getPageData } from "@/lib/getPageData";
+import GemHomePage from "@/components/pages/GemHomePage";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getPageData("home");
-
   return {
-    title: data?.metaTitle || "GemsRatna",
-    description: data?.metaDescription || "Natural Power & Spiritual Elegance",
+    title: "GemsRatna | Premium Natural Gemstones",
+    description:
+      "Luxury gemstone jewelry, healing crystals and spiritual products designed to convert.",
   };
 }
 
-export default async function Page() {
-  const data = await getPageData("home");
-
-  return <HomePage data={data} />;
+export default function Page() {
+  return <GemHomePage />;
 }
