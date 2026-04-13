@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&display=swap");
 
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -11,40 +10,47 @@
   --muted: #f4f7f5;
   --border: #e2e8e4;
 
-  --primary: #1b4d2b; /* Forest Green */
-  --secondary: #d4af37; /* Gold */
-  --accent: #eaf4ec; /* Mint/Soft Green */
-  --dark: #063a1d;
+  --primary: #0B3D2E; /* Deep Emerald Green */
+  --secondary: #D4AF37; /* Royal Gold */
+  --accent: #F8F5F0; /* Soft Ivory */
+  --dark: #0A0A0A; /* Rich Black */
+  --ruby: #9B111E;
 
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
 
-  --shadow-sm: 0 4px 12px rgba(27, 77, 43, 0.05);
-  --shadow-md: 0 12px 30px rgba(27, 77, 43, 0.1);
-  --background: #ffffff;
-  --foreground: #06130b;
+  --shadow-sm: 0 4px 12px rgba(11, 61, 46, 0.05);
+  --shadow-md: 0 12px 30px rgba(11, 61, 46, 0.1);
+  --background: #F8F5F0; /* Ivory background per request */
+  --foreground: #0A0A0A;
   --card: #ffffff;
-  --card-foreground: #06130b;
+  --card-foreground: #0A0A0A;
   --popover: #ffffff;
-  --popover-foreground: #06130b;
-  --primary-foreground: #ffffff;
-  --secondary-foreground: #ffffff;
+  --popover-foreground: #0A0A0A;
+  --primary-foreground: #F8F5F0;
+  --secondary-foreground: #0A0A0A;
   --muted-foreground: #55685b;
-  --accent-foreground: #1b4d2b;
-  --destructive: oklch(0.577 0.245 27.325);
+  --accent-foreground: #0B3D2E;
+  --destructive: #9B111E;
   --input: #e2e8e4;
-  --ring: #d4af37;
+  --ring: #D4AF37;
 
   --radius: 0.75rem;
-  --sidebar: #063a1d; /* Deepest Forest */
-  --sidebar-foreground: #eaf4ec;
-  --sidebar-primary: #d4af37;
-  --sidebar-primary-foreground: #063a1d;
+  --sidebar: #0A0A0A; /* Rich Black sidebar */
+  --sidebar-foreground: #F8F5F0;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0A0A0A;
   --sidebar-accent: rgba(212, 175, 55, 0.15);
-  --sidebar-accent-foreground: #d4af37;
-  --sidebar-border: rgba(234, 244, 236, 0.1);
-  --sidebar-ring: #d4af37;
+  --sidebar-accent-foreground: #D4AF37;
+  --sidebar-border: rgba(212, 175, 55, 0.1);
+  --sidebar-ring: #D4AF37;
+
+  /* Luxury Theme Colors */
+  --luxury-gold: #D4AF37;
+  --luxury-black: #0B0B0B;
+  --luxury-ivory: #F8F5F0;
+  --luxury-shimmer: linear-gradient(45deg, #D4AF37, #FBF4B1, #D4AF37);
 }
 
 [data-theme="dark"] {
@@ -59,8 +65,8 @@
 }
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-playfair);
 
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
@@ -104,9 +110,7 @@
   h4,
   h5,
   h6 {
-    font-family:
-      "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman",
-      Times, serif;
+    font-family: var(--font-heading), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     @apply tracking-tight font-bold;
   }
   html {
@@ -232,10 +236,8 @@
 }
 
 @theme inline {
-  --font-heading:
-    "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times,
-    serif;
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-playfair);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

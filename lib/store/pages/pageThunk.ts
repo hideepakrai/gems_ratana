@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Page } from './pageType';
+import { normalizePage } from './pageHelpers';
 
 // Fetch all pages
 export const fetchPagesThunk = createAsyncThunk(
@@ -11,9 +12,8 @@ export const fetchPagesThunk = createAsyncThunk(
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to fetch pages');
       }
-      const data= await response.json();
-      console.log("pagesg fetched ", data)
-      return data.pages;
+      const data = await response.json();
+      return (data.pages || []).map((page: Page) => normalizePage(page));
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -30,7 +30,8 @@ export const fetchPageBySlugThunk = createAsyncThunk(
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to fetch page');
       }
-      return await response.json();
+      const data = await response.json();
+      return normalizePage(data.page || data);
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -77,7 +78,7 @@ export const updatePageThunk = createAsyncThunk(
         throw new Error(errorData.message || 'Failed to update page');
       }
       const data = await response.json();
-      return { _id: id, ...pageData } as Page; // Assuming API returns success
+      return normalizePage(data.page || { _id: id, ...pageData });
     } catch (error: any) {
       return rejectWithValue(error.message);
     }

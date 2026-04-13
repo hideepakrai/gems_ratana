@@ -25,6 +25,7 @@ if (!TENANT_DB_NAME) {
 }
 
 let cachedClient = (global as any).mongoClient;
+let cachedPagesInit = (global as any).pagesInitPromise;
 
 if (!cachedClient) {
   cachedClient = (global as any).mongoClient = { conn: null, promise: null };
@@ -52,7 +53,17 @@ export async function connectMasterDB(): Promise<Db> {
   return client.db("kalp_master");
 }
 
+import { initPagesCollection } from "./initPages";
+
 export async function connectTenantDB(): Promise<Db> {
   const client = await connectClient();
-  return client.db(TENANT_DB_NAME);
+  const db = client.db(TENANT_DB_NAME);
+  
+  // Seed pages only once per server process.
+  if (!cachedPagesInit) {
+    cachedPagesInit = (global as any).pagesInitPromise = initPagesCollection(db)
+      .catch(err => console.error("Page init failed:", err));
+  }
+
+  return db;
 }

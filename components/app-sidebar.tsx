@@ -16,6 +16,9 @@ import {
   FileText,
   Image,
   UserCog2,
+  ShieldCheck,
+  Zap,
+  Gem,
 } from "lucide-react";
 import {
   Sidebar,
@@ -47,7 +50,7 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   {
-    group: "Overview",
+    group: "Divine Overview",
     items: [
       {
         label: "Dashboard",
@@ -57,7 +60,7 @@ const NAV_ITEMS = [
         badge: null,
       },
       {
-        label: "Orders",
+        label: "Spiritual Orders",
         href: "/admin/orders",
         icon: ShoppingCart,
         exact: false,
@@ -66,52 +69,40 @@ const NAV_ITEMS = [
     ],
   },
   {
-    group: "Store Management",
+    group: "Gemstone Empire",
     items: [
       {
-        label: "Products",
+        label: "Gemstones",
         href: "/admin/products",
-        icon: Package,
+        icon: Gem,
         exact: false,
         badge: null,
       },
       {
-        label: "Categories",
+        label: "Rashi / Zodiac",
         href: "/admin/categories",
-        icon: Layers,
+        icon: Sparkles,
         exact: false,
         badge: null,
       },
       {
-        label: "Attributes",
+        label: "Lab Certifications",
         href: "/admin/attributes",
-        icon: Tags,
-        exact: false,
-        badge: null,
-      },
-    ],
-  },
-  {
-    group: "Pages and Media",
-    items: [
-      {
-        label: "Pages",
-        href: "/admin/pages",
-        icon: FileText,
+        icon: ShieldCheck,
         exact: false,
         badge: null,
       },
       {
-        label: "Media",
-        href: "/admin/media",
-        icon: Image,
+        label: "Astrology Recs",
+        href: "/admin/attributes",
+        icon: Zap,
         exact: false,
-        badge: null,
+        badge: "New",
       },
     ],
   },
   {
-    group: "Customer Management",
+    group: "Patronage & Spirit",
     items: [
       {
         label: "Customers",
@@ -121,9 +112,35 @@ const NAV_ITEMS = [
         badge: null,
       },
       {
-        label: "Users",
-        href: "/admin/users",
-        icon: UserCog2,
+        label: "Astrologer Bookings",
+        href: "/admin/consultations",
+        icon: Bell,
+        exact: false,
+        badge: "1",
+      },
+    ],
+  },
+  {
+    group: "Sacred Content",
+    items: [
+      {
+        label: "Pages",
+        href: "/admin/pages",
+        icon: FileText,
+        exact: false,
+        badge: null,
+      },
+      {
+        label: "Gem Media",
+        href: "/admin/media",
+        icon: Image,
+        exact: false,
+        badge: null,
+      },
+      {
+        label: "Global Settings",
+        href: "/admin/settings",
+        icon: Settings,
         exact: false,
         badge: null,
       },
@@ -182,7 +199,7 @@ export function AppSidebar() {
                   ({ label, href, icon: Icon, exact, badge }) => {
                     const active = isActive(href, exact);
                     return (
-                      <SidebarMenuItem key={href}>
+                      <SidebarMenuItem key={`${label}-${href}`}>
                         <Link
                           href={href}
                           className={cn(

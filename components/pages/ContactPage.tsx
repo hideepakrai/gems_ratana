@@ -5,15 +5,12 @@ import { motion } from "motion/react";
 import {
   Mail,
   Phone,
-  MapPin,
-  Send,
+  Clock,
   Instagram,
   Facebook,
-  Twitter,
+  Youtube,
+  Send,
   CheckCircle2,
-  ArrowRight,
-  Globe,
-  Clock,
 } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store/store";
@@ -24,6 +21,7 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -31,6 +29,7 @@ const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { gemsratnaUser } = useSelector((state: RootState) => state.auth);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -38,366 +37,229 @@ const ContactPage = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     }, 1500);
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <>
-      {/* commentsS Plugin */}
-      {gemsratnaUser?.role == "admin" && <AnnotatorPlugin />}
-      {/* get all page from the database */}
+      {gemsratnaUser?.role === "admin" && <AnnotatorPlugin />}
       <GetAllPages />
-      <div className="pb-20 bg-background">
-        {/* Editorial Hero Section */}
-        <section className="relative min-h-[70vh] flex items-center px-[5%] overflow-hidden border-b border-border">
-          <div className="absolute inset-0 z-0">
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000"
-              alt="Office"
-              className="w-full h-full object-cover opacity-10 grayscale"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
-          </div>
 
-          <div className="max-w-7xl mx-auto w-full relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <p className="text-secondary uppercase tracking-[6px] text-[11px] font-black mb-6">
-                  Connect with us
-                </p>
-                <h1 className="text-[64px] lg:text-[92px] font-black leading-[0.9] tracking-tighter mb-8">
-                  Let's start a <br />{" "}
-                  <span className="text-secondary italic font-serif font-normal">
-                    conversation.
-                  </span>
-                </h1>
-                <p className="text-xl text-muted font-semibold max-w-[500px] leading-relaxed">
-                  Whether you're looking to transform your home or have a
-                  specific inquiry about our collections, our design experts are
-                  ready to assist you.
-                </p>
-
-                <div className="mt-12 flex gap-8">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase tracking-[2px] text-muted mb-2">
-                      Our Signature Showroom
-                    </span>
-                    <span className="font-bold text-lg">Raja Park, Jaipur</span>
-                  </div>
-                  <div className="w-px h-12 bg-border" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase tracking-[2px] text-muted mb-2">
-                      Support Hours
-                    </span>
-                    <span className="font-bold text-lg">
-                      10:30 AM — 9:00 PM
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="hidden lg:block relative"
-              >
-                <div className="aspect-[4/5] rounded-[40px] overflow-hidden border border-border shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
-                  <img
-                    src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=1200"
-                    alt="Studio"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary rounded-full flex items-center justify-center text-white p-8 text-center leading-tight font-black uppercase tracking-widest text-xs shadow-2xl animate-pulse">
-                  Available <br /> for bespoke <br /> projects
-                </div>
-              </motion.div>
-            </div>
-          </div>
+      <main className="bg-[#FDFBF7] min-h-screen text-[#1A1A1A] py-20 px-6 md:px-12 lg:px-24 selection:bg-[#C5A059]/20 font-sans">
+        
+        {/* --- TOP SECTION --- */}
+        <section className="max-w-4xl mx-auto text-center mb-24 mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h1 className="text-5xl md:text-7xl font-heading mb-6 tracking-tight text-[#1A1A1A]">
+              Contact Gems Ratna
+            </h1>
+            <p className="text-lg md:text-xl text-[#666] font-light italic tracking-wide">
+              We are here to guide you in your gemstone journey
+            </p>
+            <div className="w-24 h-px bg-[#C5A059] mx-auto mt-8 opacity-40" />
+          </motion.div>
         </section>
 
-        {/* Main Contact Section */}
-        <section className="py-32 px-[5%] max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-[1.2fr_1.8fr] gap-24">
-            {/* Left Side: Info Cards */}
-            <div className="space-y-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl font-black mb-10 tracking-tight">
-                  Reach Out
-                </h2>
-                <div className="space-y-12">
-                  <div className="group cursor-pointer">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
-                        <Mail size={18} />
-                      </div>
-                      <span className="text-[11px] font-black uppercase tracking-[2px] text-muted">
-                        Email
-                      </span>
-                    </div>
-                    <p className="text-2xl font-bold tracking-tight">
-                      gemsratnamail.com
-                    </p>
-                    <div className="w-0 group-hover:w-full h-px bg-secondary transition-all duration-500 mt-2" />
-                  </div>
-
-                  <div className="group cursor-pointer">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
-                        <Phone size={18} />
-                      </div>
-                      <span className="text-[11px] font-black uppercase tracking-[2px] text-muted">
-                        Phone
-                      </span>
-                    </div>
-                    <p className="text-2xl font-bold tracking-tight">
-                      +91 9810159604
-                    </p>
-                    <div className="w-0 group-hover:w-full h-px bg-secondary transition-all duration-500 mt-2" />
-                  </div>
-
-                  <div className="group cursor-pointer">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
-                        <MapPin size={18} />
-                      </div>
-                      <span className="text-[11px] font-black uppercase tracking-[2px] text-muted">
-                        Studio
-                      </span>
-                    </div>
-                    <p className="text-2xl font-bold tracking-tight">
-                      8A, Excellency Trade Square, Govind Marg, Rajapark Jaipur
-                      302004
-                    </p>
-                    <div className="w-0 group-hover:w-full h-px bg-secondary transition-all duration-500 mt-2" />
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-10 rounded-[32px] bg-surface border border-border shadow-sm"
+        {/* --- MAIN SECTION (Split Layout) --- */}
+        <section className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            {/* LEFT SIDE: Brand Information */}
+            <motion.div 
+              className="lg:col-span-5 space-y-16"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h3 className="text-xl font-black mb-6 tracking-tight">Global Presence</h3>
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-muted">London</span>
-                  <span className="text-sm font-black uppercase tracking-wider">Coming 2026</span>
-                </div>
-                <div className="h-px bg-border/50" />
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-muted">New York</span>
-                  <span className="text-sm font-black uppercase tracking-wider">Partner Showroom</span>
-                </div>
-                <div className="h-px bg-border/50" />
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-muted">Dubai</span>
-                  <span className="text-sm font-black uppercase tracking-wider">Design Hub</span>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-[#C5A059] mb-8">Get In Touch</h3>
+                
+                <div className="space-y-10">
+                  <div className="flex items-start gap-6 group">
+                    <div className="w-12 h-12 rounded-full border border-[#C5A059]/20 flex items-center justify-center text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-500">
+                      <Mail size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#999] mb-1">Email Address</p>
+                      <a href="mailto:info@gemsratna.com" className="text-xl font-light hover:text-[#C5A059] transition-colors duration-300">
+                        info@gemsratna.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6 group">
+                    <div className="w-12 h-12 rounded-full border border-[#C5A059]/20 flex items-center justify-center text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-500">
+                      <Phone size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#999] mb-1">Call Us</p>
+                      <a href="tel:+91XXXXXXXXXX" className="text-xl font-light hover:text-[#C5A059] transition-colors duration-300">
+                        +91 XXXXX XXXXX
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </motion.div> */}
-            </div>
 
-            {/* Right Side: Form */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl" />
-
-              <div className="bg-surface border border-border p-10 lg:p-16 rounded-[48px] shadow-2xl relative z-10">
-                {isSubmitted ? (
-                  <div className="py-20 text-center">
-                    <div className="w-24 h-24 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-8">
-                      <CheckCircle2 size={48} />
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-[#C5A059] mb-8">Working Hours</h3>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 flex items-center justify-center text-[#C5A059]">
+                      <Clock size={20} strokeWidth={1.5} />
                     </div>
-                    <h3 className="text-4xl font-black mb-4 tracking-tight">
-                      Message Received
-                    </h3>
-                    <p className="text-muted font-semibold mb-10 text-lg">
-                      Thank you for reaching out. A design consultant will
-                      contact you shortly to discuss your vision.
-                    </p>
-                    <button
-                      onClick={() => setIsSubmitted(false)}
-                      className="bg-primary text-white px-12 h-14 rounded-full text-[15px] font-bold uppercase tracking-wider hover:bg-primary/90 transition-all"
-                    >
-                      Send Another Message
-                    </button>
+                    <div>
+                      <div className="mb-4">
+                        <p className="text-base font-medium text-[#1A1A1A]">General Assistance</p>
+                        <p className="text-sm text-[#666] font-light">Available 24x7</p>
+                      </div>
+                      <div>
+                        <p className="text-base font-medium text-[#1A1A1A]">Client Support</p>
+                        <p className="text-sm text-[#666] font-light">9:00 AM to 7:30 PM IST</p>
+                      </div>
+                    </div>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-10">
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-[#C5A059] mb-8">Follow Us</h3>
+                <div className="flex gap-4">
+                  {[
+                    { icon: Instagram, link: "#" },
+                    { icon: Facebook, link: "#" },
+                    { icon: Youtube, link: "#" }
+                  ].map((social, i) => (
+                    <a 
+                      key={i} 
+                      href={social.link} 
+                      className="w-10 h-10 rounded-full border border-[#1A1A1A]/10 flex items-center justify-center text-[#1A1A1A]/60 hover:border-[#C5A059] hover:text-[#C5A059] transition-all duration-300"
+                    >
+                      <social.icon size={16} strokeWidth={1.5} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* RIGHT SIDE: Contact Form */}
+            <motion.div 
+              className="lg:col-span-7 bg-white p-10 md:p-14 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] border border-[#1A1A1A]/5"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {isSubmitted ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-20 text-center"
+                >
+                  <div className="w-20 h-20 bg-[#C5A059]/10 text-[#C5A059] rounded-full flex items-center justify-center mx-auto mb-8">
+                    <CheckCircle2 size={40} />
+                  </div>
+                  <h3 className="text-3xl font-heading mb-4">Message Sent</h3>
+                  <p className="text-[#666] font-light mb-10 max-w-sm mx-auto">
+                    Thank you for reaching out. Our experts will connect with you shortly to guide you.
+                  </p>
+                  <button 
+                    onClick={() => setIsSubmitted(false)}
+                    className="text-xs font-bold uppercase tracking-widest text-[#C5A059] border-b border-[#C5A059]/30 pb-1 hover:border-[#C5A059] transition-all"
+                  >
+                    Send Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <h3 className="text-3xl font-black tracking-tight mb-2">
-                        Send an Inquiry
-                      </h3>
-                      <p className="text-muted font-semibold">
-                        Fill out the form below and we'll get back to you within
-                        24 hours.
-                      </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-10">
-                      <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase tracking-[3px] text-muted ml-1">
-                          Your Name
-                        </label>
-                        <input
-                          required
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="John Doe"
-                          className="w-full bg-transparent border-b-2 border-border py-4 outline-none focus:border-secondary transition-all font-bold text-xl placeholder:text-muted/30"
-                        />
-                      </div>
-                      <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase tracking-[3px] text-muted ml-1">
-                          Email Address
-                        </label>
-                        <input
-                          required
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="john@example.com"
-                          className="w-full bg-transparent border-b-2 border-border py-4 outline-none focus:border-secondary transition-all font-bold text-xl placeholder:text-muted/30"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[3px] text-muted ml-1">
-                        What can we help with?
-                      </label>
-                      <select
-                        required
-                        name="subject"
-                        value={formData.subject}
+                      <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] ml-1">Full Name *</label>
+                      <input 
+                        required 
+                        type="text" 
+                        name="name" 
+                        value={formData.name} 
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b-2 border-border py-4 outline-none focus:border-secondary transition-all font-bold text-xl appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-surface">
-                          Select an option
-                        </option>
-                        <option value="bespoke" className="bg-surface">
-                          Bespoke Furniture Design
-                        </option>
-                        <option value="interior" className="bg-surface">
-                          Full Interior Consultation
-                        </option>
-                        <option value="order" className="bg-surface">
-                          Order Status & Support
-                        </option>
-                        <option value="trade" className="bg-surface">
-                          Trade & Partnership
-                        </option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[3px] text-muted ml-1">
-                        Your Message
-                      </label>
-                      <textarea
-                        required
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={4}
-                        placeholder="Tell us about your space..."
-                        className="w-full bg-transparent border-b-2 border-border py-4 outline-none focus:border-secondary transition-all font-bold text-xl resize-none placeholder:text-muted/30"
+                        className="w-full bg-transparent border-b border-[#1A1A1A]/10 py-3 px-1 outline-none focus:border-[#C5A059] transition-all font-light text-lg placeholder:text-black/5" 
                       />
                     </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] ml-1">Email Address *</label>
+                      <input 
+                        required 
+                        type="email" 
+                        name="email" 
+                        value={formData.email} 
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-[#1A1A1A]/10 py-3 px-1 outline-none focus:border-[#C5A059] transition-all font-light text-lg placeholder:text-black/5" 
+                      />
+                    </div>
+                  </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="group relative w-full bg-primary text-white h-20 rounded-full overflow-hidden transition-all disabled:opacity-70"
-                    >
-                      <div className="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                      <span className="relative z-10 flex items-center justify-center gap-4 text-[15px] font-black uppercase tracking-[3px]">
-                        {isSubmitting ? (
-                          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        ) : (
-                          <>
-                            Send Message{" "}
-                            <ArrowRight
-                              size={20}
-                              className="group-hover:translate-x-2 transition-transform"
-                            />
-                          </>
-                        )}
-                      </span>
-                    </button>
-                  </form>
-                )}
-              </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] ml-1">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        name="phone" 
+                        value={formData.phone} 
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-[#1A1A1A]/10 py-3 px-1 outline-none focus:border-[#C5A059] transition-all font-light text-lg placeholder:text-black/5" 
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] ml-1">Subject</label>
+                      <input 
+                        type="text" 
+                        name="subject" 
+                        value={formData.subject} 
+                        onChange={handleChange}
+                        placeholder="How can we help you?"
+                        className="w-full bg-transparent border-b border-[#1A1A1A]/10 py-3 px-1 outline-none focus:border-[#C5A059] transition-all font-light text-lg placeholder:text-black/10" 
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] ml-1">Your Message</label>
+                    <textarea 
+                      required 
+                      name="message" 
+                      value={formData.message} 
+                      onChange={handleChange}
+                      rows={4} 
+                      className="w-full bg-transparent border-b border-[#1A1A1A]/10 py-3 px-1 outline-none focus:border-[#C5A059] transition-all font-light text-lg resize-none placeholder:text-black/5" 
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full mt-8 bg-[#1A1A1A] text-white py-6 rounded-lg font-bold uppercase tracking-[0.3em] text-[10px] overflow-hidden relative group transition-all duration-500 hover:bg-[#C5A059] shadow-xl hover:shadow-[#C5A059]/20"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-3">
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {!isSubmitting && <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />}
+                    </span>
+                  </button>
+                </form>
+              )}
             </motion.div>
           </div>
         </section>
 
-        {/* Map Section - Minimalist */}
-        <section className="px-[5%] max-w-7xl mx-auto pb-32">
-          <div className="relative h-[600px] rounded-[60px] overflow-hidden border border-border shadow-2xl group">
-            <img
-              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=2000"
-              alt="Map"
-              className="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-60 transition-opacity duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-
-            <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-8">
-              <div className="bg-surface/80 backdrop-blur-xl p-10 rounded-[40px] border border-border max-w-md shadow-2xl">
-                <h4 className="text-2xl font-black mb-4 tracking-tight">
-                  Visit the Showroom
-                </h4>
-                <p className="text-muted font-semibold mb-6">
-                  Experience premium furniture and free design consultations at
-                  our Raja Park showroom. Feel the quality of our craftsmanship
-                  in person.
-                </p>
-                <div className="flex items-center gap-3 text-secondary font-black uppercase tracking-widest text-xs">
-                  <Clock size={16} /> Mon - Sat: 10:30 - 9:00
-                </div>
-              </div>
-
-              <a
-                href="https://share.google/UcBYZ8kXdPXVpuhBt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-500"
-              >
-                <MapPin className="text-primary" size={32} />
-              </a>
-            </div>
-          </div>
-        </section>
-      </div>
+        {/* --- BREATHING SPACE --- */}
+        <div className="h-40" />
+      </main>
     </>
   );
 };

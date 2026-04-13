@@ -1,7 +1,8 @@
-import { getPageModel } from "@/models";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { CmsRenderer } from "@/components/cms/CmsRenderer";
+import PageContentRenderer from "@/components/pages/PageContentRenderer";
+import { getPageData } from "@/lib/getPageData";
+import { isPagePublished } from "@/lib/store/pages/pageHelpers";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -9,33 +10,28 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const PageModel = await getPageModel();
-  const page = await PageModel.findOne({ slug, isPublished: true });
+  const page = await getPageData(slug);
 
-  if (!page) return { title: "Page Not Found" };
+  if (!page || !isPagePublished(page)) return { title: "Page Not Found" };
 
   return {
-    title: page.metaTitle || page.title,
-    description: page.metaDescription || "",
+    title: page.seo?.metaTitle || page.title,
+    description: page.seo?.metaDescription || "",
     openGraph: {
-      title: page.metaTitle || page.title,
-      description: page.metaDescription || "",
+      title: page.seo?.metaTitle || page.title,
+      description: page.seo?.metaDescription || "",
+      images: page.seo?.ogImage ? [page.seo.ogImage] : undefined,
     },
   };
 }
 
 export default async function DynamicCmsPage({ params }: PageProps) {
   const { slug } = await params;
-  const PageModel = await getPageModel();
-  const page = await PageModel.findOne({ slug, isPublished: true });
+  const page = await getPageData(slug);
 
-  if (!page) {
+  if (!page || !isPagePublished(page)) {
     notFound();
   }
 
-  return (
-    <main className="min-h-screen bg-white">
-      <CmsRenderer content={page.content} />
-    </main>
-  );
+  return <PageContentRenderer page={page} />;
 }

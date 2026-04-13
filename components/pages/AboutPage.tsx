@@ -7,11 +7,9 @@ import {
   BadgeCheck,
   CheckCircle2,
   HeartHandshake,
-  Leaf,
+  Gem,
   RefreshCcw,
-  Ruler,
   ShieldCheck,
-  Sofa,
   Sparkles,
   Truck,
 } from "lucide-react";
@@ -22,55 +20,55 @@ import { AnnotatorPlugin } from "../annotationPlugin/AnnotatorPlugin";
 import { resetPageComments } from "@/lib/store/comments/commentSlice";
 
 const stats = [
-  { value: "12+", label: "Years of Craftsmanship" },
-  { value: "8k+", label: "Homes Furnished" },
-  { value: "150+", label: "Design-Led Pieces" },
-  { value: "24/7", label: "Customer Support" },
+  { value: "12+", label: "Years of Trusted Guidance" },
+  { value: "8k+", label: "Seekers Assisted" },
+  { value: "150+", label: "Certified Gem Selections" },
+  { value: "24/7", label: "Consultation Support" },
 ];
 
 const values = [
   {
-    icon: Leaf,
-    title: "Sustainable Materials",
-    desc: "We source premium woods, fabrics, and finishes with a long-term view on quality and responsibility.",
+    icon: Gem,
+    title: "Natural Authenticity",
+    desc: "We focus on carefully selected gemstones chosen for clarity, origin, and energetic significance.",
   },
   {
     icon: BadgeCheck,
-    title: "Made to Last",
-    desc: "Every detail is engineered for daily living, from frame strength to stitching precision.",
+    title: "Certified Confidence",
+    desc: "Each recommendation is backed by quality checks and a commitment to genuine, trustworthy stones.",
   },
   {
     icon: HeartHandshake,
-    title: "Human-Centered Design",
-    desc: "Our furniture is built around comfort, proportion, and the way real people live at home.",
+    title: "Guidance With Care",
+    desc: "We help each customer choose gemstones with patience, clarity, and respect for personal belief.",
   },
   {
     icon: Sparkles,
-    title: "Timeless Aesthetic",
-    desc: "We create versatile pieces that feel modern today and still beautiful years from now.",
+    title: "Purposeful Selection",
+    desc: "From astrology-led choices to personal intentions, every stone is matched with meaning and purpose.",
   },
 ];
 
 const process = [
   {
     step: "01",
-    title: "Design First",
-    desc: "Each collection begins with a clear design language focused on comfort, silhouette, and utility.",
+    title: "Understand Your Need",
+    desc: "We begin with your goal, zodiac guidance, preference, and the kind of support you are seeking.",
   },
   {
     step: "02",
-    title: "Material Selection",
-    desc: "We carefully choose woods, metals, foams, fabrics, and finishes for both durability and feel.",
+    title: "Select the Right Gem",
+    desc: "Our team narrows down suitable gemstones based on authenticity, quality, budget, and intended use.",
   },
   {
     step: "03",
-    title: "Craft & Build",
-    desc: "Our makers shape, stitch, assemble, and finish every piece with close attention to detail.",
+    title: "Verify & Prepare",
+    desc: "We review stone quality, provide clear details, and prepare recommendations with care and transparency.",
   },
   {
     step: "04",
     title: "Deliver & Support",
-    desc: "From doorstep delivery to after-sales care, we make ownership smooth and reliable.",
+    desc: "From secure delivery to follow-up support, we stay available after the purchase as well.",
   },
 ];
 
@@ -78,22 +76,22 @@ const assurances = [
   {
     icon: Truck,
     title: "Fast Delivery",
-    desc: "Doorstep shipping with careful packaging and reliable updates at every stage.",
+    desc: "Secure doorstep shipping with careful packaging for gemstones and spiritual products.",
   },
   {
     icon: ShieldCheck,
     title: "Secure Checkout",
-    desc: "Safe transactions and trusted systems to protect your purchase and data.",
+    desc: "Protected payments and trusted systems to keep every order smooth and safe.",
   },
   {
     icon: RefreshCcw,
-    title: "Easy Returns",
-    desc: "Changed your mind? Our return support is designed to be simple and stress-free.",
+    title: "Honest Support",
+    desc: "Questions after purchase? We stay available to help with usage, care, and confidence.",
   },
   {
-    icon: Ruler,
-    title: "Made for Real Spaces",
-    desc: "Pieces designed with practical sizing, everyday comfort, and lasting usability.",
+    icon: Gem,
+    title: "Meaningful Recommendations",
+    desc: "Every suggestion is made to match your needs, not just to push a product.",
   },
 ];
 
@@ -122,8 +120,8 @@ const AboutPage = () => {
         >
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=1800"
-              alt="gemsratna living room"
+              src="/assets/images/diamond_hero.png"
+              alt="GemsRatna gemstone hero"
               className="h-full w-full object-cover opacity-35"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/30" />
@@ -145,11 +143,11 @@ const AboutPage = () => {
                 transition={{ delay: 0.08 }}
                 className="max-w-[780px] font-heading text-[30px] font-bold leading-[0.95] tracking-tight sm:text-[40px] lg:text-[50px]"
               >
-                Furniture that brings
+                Gemstones that bring
                 <br />
-                warmth, purpose, and
+                clarity, purpose, and
                 <br />
-                modern character home.
+                confidence to your journey.
               </motion.h1>
 
               <motion.p

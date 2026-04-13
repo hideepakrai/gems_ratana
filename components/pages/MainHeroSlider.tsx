@@ -84,7 +84,7 @@ const MainHeroSlider = ({ initialSlides = premiumHeroSlides }: { initialSlides?:
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % slides.length);
       setProgressKey((prev) => prev + 1);
-    }, 10000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -239,7 +239,7 @@ const MainHeroSlider = ({ initialSlides = premiumHeroSlides }: { initialSlides?:
                 key={progressKey}
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 10, ease: "linear" }}
+                transition={{ duration: 4, ease: "linear" }}
                 className="h-full bg-secondary"
               />
             </div>

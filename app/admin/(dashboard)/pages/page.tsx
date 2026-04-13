@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useMemo, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { fetchPagesThunk, deletePageThunk } from "@/lib/store/pages/pageThunk";
@@ -17,38 +17,79 @@ import {
   Plus,
   Pencil,
   Trash2,
-  Globe,
   FileText,
   Loader2,
   Archive,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store/store";
 import { Page } from "@/lib/store/pages/pageType";
+import {
+  getRouteLabel,
+  getStatusLabel,
+  normalizePage,
+} from "@/lib/store/pages/pageHelpers";
 import { cn } from "@/lib/utils";
 import { setCurrentPages } from "@/lib/store/pages/pagesSlice";
+
+type PageRow = {
+  key: string;
+  title: string;
+  slug: string;
+  status: string;
+  page?: Page;
+  canonicalSlug?: string;
+  isCanonical: boolean;
+};
+
+const CANONICAL_PAGES: Array<{ slug: string; routeLabel: string }> = [];
 
 function PagesPageContent() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { allPages: pages, isLoading: loading } = useSelector(
+  const { allPages: pages, isLoading: loading, isAllPageFetched } = useSelector(
     (state: RootState) => state.pages,
   );
 
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Are you sure you want to delete the page "${title}"?`))
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && !isAllPageFetched) {
+      dispatch(fetchPagesThunk());
+    }
+  }, [dispatch, isAllPageFetched, mounted]);
+
+  const rows = useMemo<PageRow[]>(() => {
+    return pages.map(normalizePage).map((page) => ({
+      key: page._id || page.slug,
+      title: page.title,
+      slug: page.slug,
+      status: getStatusLabel(page),
+      page,
+      isCanonical: false,
+    }));
+  }, [pages]);
+
+  const handleDelete = async (page: PageRow) => {
+    if (!page.page?._id) return;
+    if (!confirm(`Are you sure you want to delete the page "${page.title}"?`)) {
       return;
+    }
 
-    setDeletingId(id);
-    const toastId = toast.loading(`Deleting ${title}...`);
+    setDeletingId(page.page._id);
+    const toastId = toast.loading(`Deleting ${page.title}...`);
 
     try {
-      const resultAction = await dispatch(deletePageThunk(id));
+      const resultAction = await dispatch(deletePageThunk(page.page._id));
       if (deletePageThunk.fulfilled.match(resultAction)) {
-        toast.success(`${title} deleted successfully`, { id: toastId });
+        toast.success(`${page.title} deleted successfully`, { id: toastId });
       } else {
         toast.error(
           `Delete failed: ${resultAction.payload || "Unknown error"}`,
@@ -62,155 +103,155 @@ function PagesPageContent() {
     }
   };
 
+  const handleEdit = (row: PageRow) => {
+    if (row.page?._id) {
+      dispatch(setCurrentPages(row.page));
+      router.push(`/admin/pages/${row.page._id}/edit`);
+    }
+  };
+
+  if (!mounted) return null;
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500 p-4 sm:p-8">
-      {/* ── HEADER ────────────────────────────────────── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-primary shadow-sm shadow-primary/5 transition-transform hover:scale-105">
-            <FileText size={22} />
+      <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#121212] via-[#080808] to-[#1b1506] p-6 shadow-2xl shadow-black/30">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-400/20 bg-amber-400/10 text-amber-300 shadow-lg shadow-amber-500/10">
+              <FileText size={22} />
+            </div>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-amber-200/50">
+                Sacred Content
+              </p>
+              <h1 className="mt-2 text-3xl font-semibold text-white md:text-4xl">
+                Pages Manager
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm text-white/60">
+                Manage the home, about, contact and custom pages from one dark luxury workspace.
+              </p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-3xl font-heading font-bold text-foreground">
-              Content <span className="text-primary/40">Engine</span>
-            </h1>
-            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-muted-foreground opacity-60">
-              CMS Pages & Narrative Structure
-            </p>
-          </div>
+          <Button
+            onClick={() => router.push("/admin/pages/new")}
+            className="h-11 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-600 px-6 text-[10px] font-black uppercase tracking-[0.32em] text-black shadow-lg shadow-amber-500/20 hover:from-amber-300 hover:to-amber-500"
+          >
+            <Plus size={14} className="mr-2" /> Add New Page
+          </Button>
         </div>
-        <Button
-          onClick={() => router.push("/admin/pages/new")}
-          className="h-10 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/10 text-[10px] font-black uppercase tracking-widest px-6"
-        >
-          <Plus size={14} className="mr-2" /> New Page
-        </Button>
       </div>
 
-      {/* ── CONTENT MATRIX ────────────────────────────── */}
-      <div className="glass-card rounded-2xl overflow-hidden border-border/40">
+      <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0f0f0f] shadow-2xl shadow-black/20">
         <Table>
-          <TableHeader className="bg-surface/50">
-            <TableRow className="hover:bg-transparent border-border/20">
-              <TableHead className="h-12 font-black text-muted-foreground/50 uppercase tracking-widest text-[9px] pl-6">
-                Identity & Route
+          <TableHeader className="bg-white/5">
+            <TableRow className="border-white/10 hover:bg-transparent">
+              <TableHead className="h-14 pl-6 text-[10px] font-black uppercase tracking-[0.28em] text-white/40">
+                Page Name
               </TableHead>
-              <TableHead className="h-12 font-black text-muted-foreground/50 uppercase tracking-widest text-[9px]">
+              <TableHead className="h-14 text-[10px] font-black uppercase tracking-[0.28em] text-white/40">
+                Slug
+              </TableHead>
+              <TableHead className="h-14 text-[10px] font-black uppercase tracking-[0.28em] text-white/40">
                 Status
               </TableHead>
-              <TableHead className="h-12 font-black text-muted-foreground/50 uppercase tracking-widest text-[9px]">
-                Temporal Context
-              </TableHead>
-              <TableHead className="h-12 text-right font-black text-muted-foreground/50 uppercase tracking-widest text-[9px] pr-6">
-                Operations
+              <TableHead className="h-14 pr-6 text-right text-[10px] font-black uppercase tracking-[0.28em] text-white/40">
+                Actions
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {loading ? (
-              <TableRow>
-                <TableCell colSpan={4} className="h-64 text-center">
-                  <div className="flex flex-col items-center gap-3">
-                    <Loader2 className="h-8 w-8 animate-spin text-primary/30" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">
-                      Synchronizing Content...
+              <TableRow className="border-white/10">
+                <TableCell colSpan={4} className="h-72 text-center">
+                  <div className="flex flex-col items-center gap-3 text-white/50">
+                    <Loader2 className="h-8 w-8 animate-spin text-amber-300/40" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.35em]">
+                      Loading pages...
                     </span>
                   </div>
                 </TableCell>
               </TableRow>
-            ) : pages.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={4} className="h-64 text-center">
-                  <div className="flex flex-col items-center gap-3 opacity-30">
-                    <Archive size={40} className="text-muted-foreground" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
-                      Zero Documents In Store
+            ) : rows.length === 0 ? (
+              <TableRow className="border-white/10">
+                <TableCell colSpan={4} className="h-72 text-center">
+                  <div className="flex flex-col items-center gap-3 text-white/30">
+                    <Archive size={40} />
+                    <span className="text-[10px] font-black uppercase tracking-[0.35em]">
+                      No pages found
                     </span>
                   </div>
                 </TableCell>
               </TableRow>
             ) : (
-              pages.map((page: Page) => (
-                <TableRow
-                  key={page._id}
-                  className="hover:bg-primary/5 border-border/10 transition-colors group"
-                >
-                  <TableCell className="pl-6 py-4">
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-xl bg-background/50 flex items-center justify-center text-muted-foreground group-hover:text-primary border border-border/20 transition-colors">
-                        <Globe size={18} />
+              rows.map((row) => {
+                const routeLabel = row.isCanonical
+                  ? CANONICAL_PAGES.find((page) => page.slug === row.slug)?.routeLabel ||
+                    getRouteLabel(row.slug)
+                  : getRouteLabel(row.slug);
+
+                return (
+                  <TableRow
+                    key={row.key}
+                    className="group border-white/10 transition-colors hover:bg-white/5"
+                  >
+                    <TableCell className="pl-6 py-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-400/10 bg-amber-400/10 text-amber-300 transition-transform duration-300 group-hover:scale-105">
+                          <Sparkles size={18} />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-semibold text-white">
+                            {row.title}
+                          </span>
+                          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-white/30">
+                            {row.isCanonical ? "Core page" : "Custom page"}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex flex-col">
-                        <span className="font-bold text-foreground text-sm leading-none mb-1 group-hover:text-primary transition-colors">
-                          {page.title}
-                        </span>
-                        <code className="text-[10px] text-muted-foreground/60 font-mono tracking-tighter">
-                          /{page.slug}
-                        </code>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
+                    </TableCell>
+                    <TableCell>
+                      <code className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-amber-100/80">
+                        {routeLabel}
+                      </code>
+                    </TableCell>
+                    <TableCell>
                       <span
                         className={cn(
-                          "px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border",
-                          page.isPublished
-                            ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
-                            : "bg-surface/50 text-muted-foreground border-border/40",
+                          "inline-flex rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.28em]",
+                          row.status === "Published"
+                            ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+                            : "border-white/10 bg-white/5 text-white/50",
                         )}
                       >
-                        {page.isPublished ? "Published" : "Draft"}
+                        {row.status}
                       </span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-muted-foreground">
-                        {page.updatedAt
-                          ? new Date(page.updatedAt).toLocaleDateString(
-                              undefined,
-                              {
-                                day: "2-digit",
-                                month: "short",
-                                year: "numeric",
-                              },
-                            )
-                          : "N/A"}
-                      </span>
-                      <span className="text-[9px] font-black uppercase tracking-tighter text-muted-foreground/30">
-                        Last Synchronization
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right pr-6">
-                    <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10"
-                        onClick={() => {
-                          dispatch(setCurrentPages(page));
-                          router.push(`/admin/pages/${page._id}/edit`);
-                        }}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 rounded-lg text-muted-foreground hover:text-rose-500 hover:bg-rose-500/10"
-                        disabled={deletingId === page._id}
-                        onClick={() =>
-                          page._id && handleDelete(page._id, page.title)
-                        }
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
+                    </TableCell>
+                    <TableCell className="pr-6 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="rounded-xl border border-white/10 bg-white/5 px-4 text-[10px] font-black uppercase tracking-[0.25em] text-white/70 hover:bg-amber-400/10 hover:text-amber-200"
+                          onClick={() => handleEdit(row)}
+                        >
+                          <Pencil className="mr-2 h-4 w-4" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="rounded-xl border border-white/10 bg-white/5 px-4 text-[10px] font-black uppercase tracking-[0.25em] text-white/70 hover:bg-rose-500/10 hover:text-rose-300"
+                          disabled={deletingId === row.page?._id || !row.page?._id}
+                          onClick={() => handleDelete(row)}
+                        >
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          Delete
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
@@ -223,10 +264,10 @@ export default function PagesPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-primary/40" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-40">
-            Initializing Content Engine...
+        <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-amber-300/40" />
+          <span className="text-[10px] font-black uppercase tracking-[0.35em] text-white/40">
+            Initializing Pages Manager...
           </span>
         </div>
       }

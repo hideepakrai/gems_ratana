@@ -3,18 +3,30 @@ import './globals.css';
 import Providers from '@/components/Providers';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import StoreProvider from '@/app/StoreProvider';
-import { AnnotatorPlugin } from '@/components/annotationPlugin';
-import { Geist } from "next/font/google";
+import { Inter, Cormorant_Garamond, Playfair_Display, Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const heading = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-garamond",
+});
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: 'GemsRatna Premium Gemstones',
   description: 'Premium natural gemstones and spiritual wellness products.',
   icons: {
-    icon: '/assets/Image/favicon.svg', // 👈 favicon added
+    icon: '/assets/Image/favicon.svg',
     shortcut: '/assets/Image/favicon.svg',
     apple: '/assets/Image/favicon.svg',
   },
@@ -27,14 +39,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("font-sans", geist.variable)}
+      className={cn("font-sans", inter.variable, heading.variable, playfair.variable, poppins.variable)}
     >
       <body>
         <ChunkErrorRecovery />
         <StoreProvider>
           <Providers>
             <LayoutWrapper>{children}</LayoutWrapper>
-            {/* <AnnotatorPlugin /> */}
           </Providers>
         </StoreProvider>
       </body>

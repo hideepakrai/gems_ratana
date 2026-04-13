@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { connectTenantDB } from "./db";
 import { isHex } from "@/lib/utils";
 import { ObjectId } from "mongodb";
@@ -7,14 +6,15 @@ function serialize(obj: any) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-export const getPageData = cache(async (slug: string) => {
+export async function getPageData(slug: string) {
+  console.log("Fetching page data for slug:", slug);
   const db = await connectTenantDB();
   const page = await db.collection("pages").findOne({ slug });
 
   return serialize(page);
-});
+}
 
-export const getSingleProduct = cache(async (id: string) => {
+export async function getSingleProduct(id: string) {
   const db = await connectTenantDB();
   const productColl = db.collection("products");
 
@@ -53,4 +53,4 @@ export const getSingleProduct = cache(async (id: string) => {
     .toArray();
 
   return serialize(products[0]);
-});
+}

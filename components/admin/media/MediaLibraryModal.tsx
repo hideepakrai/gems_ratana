@@ -1,10 +1,9 @@
-"use client";
-
 import React, { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { MediaUploader } from "./MediaManage";
 import { Button } from "@/components/ui/button";
 import { ImageIcon, X } from "lucide-react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface MediaLibraryModalProps {
   onSelect: (media: { url: string; alt: string }) => void;
@@ -32,30 +31,33 @@ export const MediaLibraryModal = ({
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+            className="h-10 w-10 rounded-xl border-white/10 bg-white/5 text-amber-200 hover:bg-white/10 hover:text-amber-400 transition-all"
           >
-            <ImageIcon size={14} />
+            <ImageIcon size={18} />
           </Button>
         )}
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!h-[90vh] !max-w-[90vw] w-[90vw] !p-0 overflow-hidden border-none bg-transparent shadow-none [&>button]:hidden">
-          <div className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
-            <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/50">
+        <DialogContent className="!h-[90vh] !max-w-[95vw] w-[95vw] !p-0 overflow-hidden border-white/10 bg-[#0a0a0a] shadow-2xl [&>button]:hidden">
+          <VisuallyHidden>
+            <DialogTitle>Media Library</DialogTitle>
+          </VisuallyHidden>
+          <div className="flex h-full flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-white/5 bg-black/40">
               <div>
-                <h2 className="text-xl font-bold text-slate-900">
+                <h2 className="text-xl font-bold text-white tracking-tight">
                   Media Library
                 </h2>
-                <p className="text-xs text-slate-500 font-medium tracking-wide pt-0.5">
-                  Select or upload media for your page
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200/50 pt-1">
+                  Select or upload brand assets
                 </p>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setOpen(false)}
-                className="rounded-xl text-slate-400 hover:text-slate-900"
+                className="rounded-xl h-10 w-10 text-white/40 hover:text-white hover:bg-white/5"
               >
                 <X size={20} />
               </Button>

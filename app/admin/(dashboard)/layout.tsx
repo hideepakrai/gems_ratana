@@ -57,35 +57,35 @@ export default async function DashboardLayout({
       <GetAllAdminUsers />
       <SidebarProvider>
         <AppSidebar />
-        <main className="w-full flex-1 flex flex-col bg-muted/20 relative min-h-screen font-sans antialiased text-foreground">
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-border/40 bg-white backdrop-blur-sm px-6 transition-all sticky top-0 z-[9999] shadow-sm">
+        <main className="w-full flex-1 flex flex-col bg-luxury-ivory relative min-h-screen font-poppins antialiased text-luxury-black">
+          <header className="flex h-20 shrink-0 items-center gap-2 border-b border-luxury-gold/10 bg-white/70 backdrop-blur-xl px-8 transition-all sticky top-0 z-[9999] shadow-sm">
             <div className="flex items-center gap-2">
-              <SidebarTrigger className="-ml-1 text-primary hover:bg-primary/5 rounded-lg transition-colors" />
+              <SidebarTrigger className="-ml-1 text-luxury-gold hover:bg-luxury-gold/10 rounded-xl transition-colors" />
               <Separator
                 orientation="vertical"
-                className="mr-2 h-4 bg-border/40"
+                className="mr-2 h-4 bg-luxury-gold/20"
               />
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink
                       href="/admin"
-                      className="font-black text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
+                      className="font-black text-[10px] uppercase tracking-[0.3em] text-luxury-black/40 hover:text-luxury-gold transition-colors"
                     >
-                      Dashboard
+                      Imperial Dashboard
                     </BreadcrumbLink>
                   </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block opacity-40" />
+                  <BreadcrumbSeparator className="hidden md:block opacity-40 text-luxury-gold" />
                   <BreadcrumbItem>
-                    <BreadcrumbPage className="font-black text-[10px] uppercase tracking-[0.2em] text-primary">
-                      Overview
+                    <BreadcrumbPage className="font-black text-[10px] uppercase tracking-[0.3em] text-luxury-gold">
+                      Vault Overview
                     </BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
           </header>
-          <div className="bg-white flex-1 p-6 md:p-8 max-w-7xl mx-auto w-full animate-in fade-in duration-500">
+          <div className="flex-1 p-8 md:p-12 max-w-[1800px] mx-auto w-full animate-in fade-in duration-1000">
             {children}
           </div>
         </main>
